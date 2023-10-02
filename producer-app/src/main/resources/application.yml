@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Producer
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    producer:
+      value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
+      key-serializer: "com.example.producer.UuidToStringSerializer"
+      properties:
+        spring.json.type.mapping: cev:com.example.producer.CustomerEvent
+      client-id: ${spring.application.name}
+      transaction-id-prefix: "prTrx"
+
+logging:
+  level:
+    org.springframework.kafka: debug
+    org.springframework.boot: info
